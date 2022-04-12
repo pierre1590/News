@@ -1,9 +1,25 @@
+import {useState,useEffect} from "react";
 import { FlatList,RefreshControl,Text } from 'react-native';
 import {fetchEntertainment} from '../utils/fetchAPI';
 import {Card} from '../components/ui/Card';
 
 export const Entertainment = () => {
-    const news = fetchEntertainment();
+    const [news,setNews] = useState([]);
+    const [refreshing,setRefreshing] = useState(false);
+    const [isLoading,setIsLoading] = useState(false);
+    const [error,setError] = useState(false);
+    
+    useEffect(() => {
+        fetchEntertainment()
+        .then(data => {
+            setNews(data);  
+            setIsLoading(false);
+        })
+        .catch(error => {
+            setError(true);
+            setIsLoading(false);
+        });
+    })
 
     return (
         <>
@@ -23,6 +39,7 @@ export const Entertainment = () => {
                 refreshControl={
                     <RefreshControl
                             refreshing={false}
+                            onRefresh={news}
                         />
                 }
             />

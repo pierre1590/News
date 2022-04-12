@@ -7,6 +7,7 @@ import {Search } from './screens/Search';
 import {Entertainment } from './screens/Entertainment';
 import{Sport} from './screens/Sport';
 import {Ionicons} from '@expo/vector-icons';
+import { Platform } from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,22 +23,29 @@ export default function App() {
         tabBarActiveTintColor: '#00f',
         tabBarInactiveTintColor: '#001',
         tabBarStyle: {
-          backgroundColor: '#ccc',
-          height: 55,
+          backgroundColor: '#ccb',
+          height: 60,
+          position: 'absolute',
+          bottom:16,
+          right: 16,
+          left: 16,
+          borderRadius:  18,
+          elevation:4,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 1,
+            height: 2,
         },
-        tabBarActiveBackgroundColor: '#fff',
-        tabBarInactiveBackgroundColor: '#ccc',
-        
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        },
         tabBarLabelStyle: {
-          fontSize: 13,
-          marginBottom: 10,
+          fontSize: 12,
+          marginBottom: 5,
         },
-        marginBottom: 15,
         headerStyle: {backgroundColor: 'grey'},
         headerTintColor: '#fff',
         headerTitleStyle: {fontSize: 22,fontWeight: 'bold'},
-        
-        
       }}
       >
         <Tab.Screen name="TopNews" component={TopNews}

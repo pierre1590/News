@@ -1,4 +1,4 @@
-
+import {useState,useEffect} from "react";
 import {FlatList,RefreshControl,Text} from 'react-native';
 import {fetchTopNews} from '../utils/fetchAPI';
 import {Card} from '../components/ui/Card';
@@ -7,14 +7,29 @@ import {Card} from '../components/ui/Card';
 
 
 export const TopNews = () => {
-   const news = fetchTopNews();
+    const [news,setNews] = useState([]);
+    const [refreshing,setRefreshing] = useState(false);
+    const [isLoading,setIsLoading] = useState(false);
+    const [error,setError] = useState(false);
+   
+   
+   useEffect(() => {
+         fetchTopNews()
+         .then(data => {
+              setNews(data);
+              setIsLoading(false);
+         })
+         .catch(error => {
+              setError(true);
+              setIsLoading(false);
+         });
+    },[]);
 
 
 
     return (
-        <>
-        {/* Display the news results or the error message*/}
-        {news ? (
+      <>
+         {news ? (
             <FlatList
                 data={news}
                 renderItem={({item}) => <Card
@@ -29,12 +44,13 @@ export const TopNews = () => {
                 refreshControl={
                     <RefreshControl
                             refreshing={false}
-                    />
+                            onRefresh={news}
+                        />
                 }
             />
         ) : (
             <Text>Loading...</Text>
         )}
-       </>
-    )
+      </>
+    );
 }

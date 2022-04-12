@@ -1,17 +1,32 @@
-
+import {useState,useEffect} from "react";
 import {FlatList,RefreshControl,Text} from 'react-native';
 import {fetchSport} from '../utils/fetchAPI';
 import {Card} from '../components/ui/Card';
 
 
 export const Sport = () => {
-    const news = fetchSport();
+    const [news,setNews] = useState([]);
+    const [refreshing,setRefreshing] = useState(false);
+    const [isLoading,setIsLoading] = useState(false);
+    const [error,setError] = useState(false);
+
+    useEffect(() => {
+            fetchSport()
+            .then(data => {
+                    setNews(data);
+                    setIsLoading(false);
+            })
+            .catch(error => {
+                    setError(true);
+                    setIsLoading(false);
+            });
+    },[]);
      
          return (
              <>
                 {/* Display the news results or the error message*/}
-                {news ? (
-                    <FlatList
+                {news ? (   
+                    <FlatList   
                         data={news}
                         renderItem={({item}) => <Card
                             title={item.title}
@@ -24,7 +39,8 @@ export const Sport = () => {
                         keyExtractor={item => item.title}
                         refreshControl={
                             <RefreshControl
-                                    refreshing={false}
+                                refreshing={false}
+                                onRefresh={news}
                             />
                         }
                     />

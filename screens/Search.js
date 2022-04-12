@@ -36,7 +36,7 @@ export const Search = () => {
         {/* Create a search form with Formik*/}
         <Formik
             initialValues={{search:''}}
-            onSubmit={handleSubmit}
+            onSubmit={values => handleSubmit(values)}
         >
             {({handleChange,handleSubmit,values}) => (
                 <View style={styles.container}>
@@ -44,15 +44,14 @@ export const Search = () => {
                         <Ionicons name="ios-search" size={24} color="black" />
                         <TextInput
                             style={styles.searchInput}
-                            placeholder="Search"
+                            placeholder="Search news..."
                             onChangeText={handleChange('search')}
-                            onSubmitEditing={handleSubmit}
-                            value={values}
+                            value={values.search}
                         />
                     </View>
                 </View>
             )}
-        </Formik>   
+        </Formik>
 
 
 
