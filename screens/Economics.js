@@ -37,8 +37,8 @@ export const Economics = () => {
                     />}
                     keyExtractor={item => item.title}
                     refreshControl={
-                        <RefreshControl
-                            refreshing={false}
+                        <RefreshControl 
+                            refreshing={true}
                             onRefresh={news}
                         />
                     }

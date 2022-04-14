@@ -38,7 +38,7 @@ export const Entertainment = () => {
                 keyExtractor={item => item.title}
                 refreshControl={
                     <RefreshControl
-                            refreshing={false}
+                            refreshing={true}
                             onRefresh={news}
                         />
                 }

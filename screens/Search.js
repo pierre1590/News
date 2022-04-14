@@ -1,79 +1,54 @@
-import {useState} from 'react';
-import {TextInput, View,StyleSheet,FlatList,Text} from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
+import {useState,useEffect} from "react";
+import {StyleSheet,FlatList,Text} from 'react-native';
 import {fetchSearchNews} from '../utils/fetchAPI';
 import {Card} from '../components/ui/Card';
-import {Formik} from 'formik';
+import { SearchBar } from '../components/ui/SearchBar';
 
 export const Search = () => {
+    const ClientApi = fetchSearchNews();
+
     const [news,setNews] = useState([]);
-    const [search,setSearch] = useState('');
-    
-    
-    const handleSubmit = (values) => {
-        const search = fetchSearchNews(values);
+    const [isLoading,setIsLoading] = useState(false);
+    const [error,setError] = useState(false);
 
-        try{
-            fetchSearchNews(search)
-            .then(response => {
-                setNews(response);
-                setSearch('');
-            })
-        }
-        catch(error){
-            console.log(error);
-        }
-    }
+    useEffect(() => {
+        ClientApi
+        .then(data => {
+            setNews(data);
+            setIsLoading(false);
+        })
+        .catch(error => {
+            setError(true);
+            setIsLoading(false);
+        });
+    },[]);
 
-        
-    
-   
 
 
 
     return (
-        <>
-        {/* Create a search form with Formik*/}
-        <Formik
-            initialValues={{search:''}}
-            onSubmit={values => handleSubmit(values)}
-        >
-            {({handleChange,handleSubmit,values}) => (
-                <View style={styles.container}>
-                    <View style={styles.searchContainer}>
-                        <Ionicons name="ios-search" size={24} color="black" />
-                        <TextInput
-                            style={styles.searchInput}
-                            placeholder="Search news..."
-                            onChangeText={handleChange('search')}
-                            value={values.search}
-                        />
-                    </View>
-                </View>
+      <>
+        <SearchBar />
+        
+        {ClientApi ? (
+          <FlatList
+            data={ClientApi}
+            renderItem={({ item }) => (
+              <Card
+                title={item.title}
+                description={item.description}
+                publishedAt={item.publishedAt}
+                urlToImage={item.urlToImage}
+                author={item.author}
+                url={item.url}
+              />
             )}
-        </Formik>
-
-
-
-      
-        {/* Display the news results or the error message*/}
-        {news ? (
-            <FlatList
-                data={news}
-                renderItem={({item}) => <Card
-                    title={item.title}
-                    description={item.description}
-                    publishedAt={item.publishedAt}
-                    urlToImage={item.urlToImage}
-                    author={item.author}
-                    url={item.url}
-                />}
-                keyExtractor={item => item.title}
-            />
+            keyExtractor={(item) => item.title}
+          />
         ) : (
-            <Text>Loading...</Text>
+          <Text style={styles.errorText}>No corresponding news was found.</Text>
         )}
-        </>
+      </>
     );
 };
 
@@ -86,21 +61,10 @@ export const Search = () => {
        
 
 const styles = StyleSheet.create({
-    searchContainer: {
-        backgroundColor: '#fff',
-        borderRadius: 10,
-        margin:15,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '90%',
-    },
-    searchInput: {
-        width: '60%',
-        height: 40,
-        textAlign: 'left',
-        margin:5,
-        fontSize: 18,
+    errorText: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+        color: '#f02'
     },
 })
