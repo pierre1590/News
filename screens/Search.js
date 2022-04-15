@@ -1,53 +1,35 @@
-import {useState,useEffect} from "react";
-import {StyleSheet,FlatList,Text} from 'react-native';
-import {fetchSearchNews} from '../utils/fetchAPI';
-import {Card} from '../components/ui/Card';
+import react, {useState, useEffect} from 'react';
+import { fetchSearchNews } from '../utils/fetchAPI';
 import { SearchBar } from '../components/ui/SearchBar';
+import { List } from '../components/ui/List';
 
 export const Search = () => {
-    const ClientApi = fetchSearchNews();
+     const [news,setNews] = useState([]);
+     const [isLoading,setIsLoading] = useState(false);
+     const [error,setError] = useState(false);
+      const [searchText,setSearchText] = useState('');
 
-    const [news,setNews] = useState([]);
-    const [isLoading,setIsLoading] = useState(false);
-    const [error,setError] = useState(false);
 
+      //Retrieve the searched news from the API
     useEffect(() => {
-        ClientApi
+        fetchSearchNews(searchText)
         .then(data => {
-            setNews(data);
+            setNews(data);  
             setIsLoading(false);
         })
         .catch(error => {
             setError(true);
             setIsLoading(false);
         });
-    },[]);
+    },[searchText]);
+  
+   
+  console.log(searchText); 
 
-
-
-
-    return (
+     return (
       <>
-        <SearchBar />
-        
-        {ClientApi ? (
-          <FlatList
-            data={ClientApi}
-            renderItem={({ item }) => (
-              <Card
-                title={item.title}
-                description={item.description}
-                publishedAt={item.publishedAt}
-                urlToImage={item.urlToImage}
-                author={item.author}
-                url={item.url}
-              />
-            )}
-            keyExtractor={(item) => item.title}
-          />
-        ) : (
-          <Text style={styles.errorText}>No corresponding news was found.</Text>
-        )}
+        <SearchBar  setSearchText={setSearchText}/>
+        <List news={news} />
       </>
     );
 };
@@ -60,11 +42,3 @@ export const Search = () => {
         
        
 
-const styles = StyleSheet.create({
-    errorText: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-        color: '#f02'
-    },
-})

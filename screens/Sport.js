@@ -6,7 +6,6 @@ import {Card} from '../components/ui/Card';
 
 export const Sport = () => {
     const [news,setNews] = useState([]);
-    const [refreshing,setRefreshing] = useState(false);
     const [isLoading,setIsLoading] = useState(false);
     const [error,setError] = useState(false);
 

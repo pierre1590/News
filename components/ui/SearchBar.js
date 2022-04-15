@@ -1,55 +1,66 @@
-import React from 'react';
-import {Formik} from 'formik';
-import {View,TextInput,StyleSheet} from 'react-native';
-import {fetchSearchNews} from '../../utils/fetchAPI';
+import React, {useState} from "react";
+import { StyleSheet, TextInput, View,Keyboard} from "react-native";
+import {Ionicons} from '@expo/vector-icons';
 
 
-export const SearchBar = () => {
-const ClientApi = fetchSearchNews();
+export const  SearchBar = ({setSearchText}) => {
+    const [value,setValue] = useState('');
 
-const onSubmit = (values) => {
-  ClientApi.response.data.articles(values.search)
-}
-
-
+  
   return (
     <>
-      <Formik
-        initialValues={{search:''}}
-        onSubmit={onSubmit}  
-      >
-        {({handleChange,values}) => (
-          <View style={styles.searchContainer}>
-            <TextInput
-              style={styles.searchInput}
-              onChangeText={handleChange('search')}
-              value={values.search}
-              placeholder='Search news...'
-            />
-           
-          </View>
+      <View style={styles.searchContainer}> 
+        <Ionicons name="ios-search" size={24} color="black" />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search news..."
+          onChangeText={setValue}
+          onSubmitEditing={() => setSearchText(value)}
+          value={value}
+        />
+        {/*If input length is > 0 ios-close icon appears otherwise nothing */}
+        {value.length > 0 && (  
+          <Ionicons name="ios-close" size={24} color="black"
+          onPress={() => {
+            setValue('');
+            Keyboard.dismiss();
+          }}
+          />  
         )}
-      </Formik>
-    </>
-  )
+          
+
+        
+      </View>
+    
+</>
+)
 }
 
 const styles = StyleSheet.create({
   searchContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    margin:15,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '90%',
-},
-searchInput: {
-    width: '60%',
+    backgroundColor: "#fff",
+    borderRadius: 12,
+    margin: 15,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "90%",
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  searchInput: {
+    width: "60%",
     height: 40,
-    textAlign: 'left',
-    margin:5,
+    textAlign: "left",
+    margin: 5,
     fontSize: 18,
-}
-})
+    color: '#000',
+  },
+});

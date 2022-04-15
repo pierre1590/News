@@ -5,7 +5,6 @@ import { fetchEconomics } from '../utils/fetchAPI';
 
 export const Economics = () => {
     const [news,setNews] = useState([]);
-    const [refreshing,setRefreshing] = useState(false);
     const [isLoading,setIsLoading] = useState(false);
     const [error,setError] = useState(false);
 

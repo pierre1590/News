@@ -35,8 +35,7 @@ export const fetchSport = async () => {
 
 {/*Search news from NewsAPI with search term   */}
 export const fetchSearchNews = async (search) => {
-    
-    const url = `${baseUrl}everything?q=${search}&apiKey=${API_NEWS_KEY}`;
+    const url = `${baseUrl}everything?q=${search}&language=it&apiKey=${API_NEWS_KEY}`;
     const response = await axios.get(url);
     return response.data.articles;
    

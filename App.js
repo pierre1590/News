@@ -7,7 +7,7 @@ import {Search } from './screens/Search';
 import {Entertainment } from './screens/Entertainment';
 import{Sport} from './screens/Sport';
 import {Ionicons} from '@expo/vector-icons';
-import { Platform } from 'react-native';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -23,6 +23,12 @@ export default function App() {
         tabBarActiveTintColor: '#00f',
         tabBarInactiveTintColor: '#001',
         tabBarStyle: {
+          width: '85%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginLeft: '3%',
+          marginVertical: 15,
+          marginHorizontal: '3%',
           backgroundColor: '#ccb',
           height: 60,
           position: 'absolute',
@@ -33,8 +39,8 @@ export default function App() {
           elevation:4,
           shadowColor: '#000',
           shadowOffset: {
-            width: 1,
-            height: 2,
+            width: 2,
+            height: 3,
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
