@@ -1,4 +1,4 @@
-import {FlatList,View,Text,StyleSheet} from 'react-native';
+import {FlatList,Text,StyleSheet} from 'react-native';
 import {Card} from '../../components/ui/Card';
 
 
@@ -15,7 +15,7 @@ export const List = ({news}) => {
                     No corresponding news was found.
             </Text>
         ) : (
-            <View style={styles.container}>
+          
             <FlatList
                 data={news}
                 renderItem={({item}) => <Card
@@ -31,7 +31,6 @@ export const List = ({news}) => {
                     <Text style={styles.messageText}>Enter the news or word to search for.</Text>
                 }
             />
-        </View>
         )}
       </>
     );
@@ -53,11 +52,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         textAlign:'center',
     },
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign:'center',
-        margin:30,
-        marginBottom:20,
-    }
+    
 })

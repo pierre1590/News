@@ -18,12 +18,13 @@ export const  SearchBar = ({setSearchText}) => {
           onSubmitEditing={() => setSearchText(value)}
           value={value}
         />
-        {/*If input length is > 0 ios-close icon appears otherwise nothing */}
+        {/*If input length is > 0 ios-close icon appears and clear value  otherwise nothing */}
         {value.length > 0 && (  
           <Ionicons name="ios-close" size={24} color="black"
           onPress={() => {
             setValue('');
             Keyboard.dismiss();
+
           }}
           />  
         )}
