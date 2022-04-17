@@ -2,7 +2,8 @@
 - iOS Screen
 
 - Android Screen
-[img][https://i.ibb.co/f9Xf9Q8/Android-Screen.jpg]
+
+<img src="https://i.ibb.co/f9Xf9Q8/Android-Screen.jpg" alt="Android-Screen" >
 
 <details open="open">
     <summary>Table of Contents</summary>
