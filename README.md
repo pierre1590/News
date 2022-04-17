@@ -1,8 +1,8 @@
 # News App
 - iOS Screen
-<img src="https://i.ibb.co/VgT9LjW/iOS.jpg" width="300px" height="300px" text-align='center' alt='iOS screen'>
+
 - Android Screen
-<img src="https://i.ibb.co/VgT9LjW/iOS.jpg" width="300px" height="300px" text-align='center' alt='Android screen'>
+<img src="https://i.ibb.co/f9Xf9Q8/Android-Screen.jpg" alt="Android-Screen" >
 
 <details open="open">
     <summary>Table of Contents</summary>
@@ -20,6 +20,7 @@
 ## Project
 The app I created consists of viewing the main world news, Top news, Economics, Entertainment and Sports.
 I also created a section to search for news starting from a word or phrase.
+When you click on a news you are brought back to the site where it is present.
 
 ## Installation
 1 ) In the root folder create a new file called `.env` and inside: 
