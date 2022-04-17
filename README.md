@@ -1,11 +1,11 @@
 # News App
 - iOS Screen
 
-<img src="https://i.ibb.co/1qS8SCD/i-OSScreen.jpg" alt="iOS Screen" width='300' height='450'>
+<img src="https://i.ibb.co/1qS8SCD/i-OSScreen.jpg" alt="iOS Screen" width='300' height='500'>
 
 - Android Screen
 
-<img src="https://i.ibb.co/f9Xf9Q8/Android-Screen.jpg" alt="Android Screen" width='300' height='450'>
+<img src="https://i.ibb.co/f9Xf9Q8/Android-Screen.jpg" alt="Android Screen" width='300' height='500'>
 
 <details open="open">
     <summary>Table of Contents</summary>
